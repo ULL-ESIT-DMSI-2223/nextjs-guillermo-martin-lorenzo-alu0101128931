@@ -4,46 +4,43 @@ import styles from "./index.module.css";
 import Link from 'next/link'
 
 export default function Home() {
-  const [promptInput, setPrompt] = useState("");
-  const [result, setResult] = useState("");
-
+  const [animalInput, setAnimalInput] = useState("");
+  const [result, setResult] = useState();
 
   async function onSubmit(event) {
     event.preventDefault();
-    const response = await fetch("/api/imageGen", {
+    const response = await fetch("/api/generate", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ prompt: promptInput }),
+      body: JSON.stringify({ animal: animalInput }),
     });
     const data = await response.json();
     setResult(data.result);
-    setPrompt("");
-  };
-
+    setAnimalInput("");
+  }
   return (
     <div>
       <Head>
-        <title>Photo generator</title>
-        <link rel="icon" href="/camera" />
+        <title>Name my pet</title>
+        <link rel="icon" href="/dog.png" />
       </Head>
 
       <main className={styles.main}>
-        <img src="/photo_icon.jpg" className={styles.icon} />
-        <h3>Photo generator</h3>
+        <img src="/dog.png" className={styles.icon} />
+        <h3>Name my pet</h3>
         <form onSubmit={onSubmit}>
           <input
             type="text"
             name="animal"
-            placeholder="Ej. Green horse with purple eyes"
-            value={promptInput}
-            onChange={(e) => setPrompt(e.target.value)}
+            placeholder="Enter an animal"
+            value={animalInput}
+            onChange={(e) => setAnimalInput(e.target.value)}
           />
-          <input type="submit" value="Generate image" />
+          <input type="submit" value="Generate names" />
         </form>
-        <br></br>
-        <img className="result-image" src={result} />
+        <div className={styles.result}>{result}</div>
         <br></br>
         <Link href="/">
           <a>
@@ -53,5 +50,4 @@ export default function Home() {
       </main>
     </div>
   );
-
 }
