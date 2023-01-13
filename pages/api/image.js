@@ -1,48 +1,57 @@
 import Head from "next/head";
 import { useState } from "react";
 import styles from "./index.module.css";
+import Link from 'next/link'
 
 export default function Home() {
+  const [promptInput, setPrompt] = useState("");
+  const [result, setResult] = useState("");
 
-    const [textInput, setTextInput] = useState("");
-    const [imageResult, setImageResult] = useState();
-  
-    async function onTextSubmit(event) {
-      event.preventDefault();
-      const imageResponse = await fetch("/api/generateImage", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ text: textInput }),
-      });
-      
-      const imageData = await imageResponse.json();
-      setImageResult(imageData.imageResult);
-      setTextInput("");
+
+  async function onSubmit(event) {
+    event.preventDefault();
+    const response = await fetch("/api/imageGen", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ prompt: promptInput }),
+    });
+    const data = await response.json();
+    setResult(data.result);
+    setPrompt("");
   };
 
-return (
+  return (
     <div>
-        <Head>
-            <title>OpenAI Quickstart</title>
-            <link rel="icon" href="/dog.png" />
-        </Head>
-        <main className={styles.main}>
-            <img src="/image.png" className={styles.icon} />
-                <h3>Genera una imagen a partir de texto</h3>
-                <form onSubmit={onTextSubmit}>
-                  <input
-                    type="text"
-                    name="image"
-                    placeholder="Escribe para ver magia"
-                    value={textInput}
-                    onChange={(i) => setTextInput(i.target.value)}
-                  />
-                  <input type="submit" value="Generar Imagen" />
-                </form>
-            <div className={styles.result}><img src={imageResult} />  </div>
-        </main>
+      <Head>
+        <title>Photo generator</title>
+        <link rel="icon" href="/cam-icon.png" />
+      </Head>
+
+      <main className={styles.main}>
+        <img src="/cam-icon.png" className={styles.icon} />
+        <h3>Photo generator</h3>
+        <form onSubmit={onSubmit}>
+          <input
+            type="text"
+            name="animal"
+            placeholder="Ej. Green horse with purple eyes"
+            value={promptInput}
+            onChange={(e) => setPrompt(e.target.value)}
+          />
+          <input type="submit" value="Generate image" />
+        </form>
+        <br></br>
+        <img className="result-image" src={result} />
+        <br></br>
+        <Link href="/">
+          <a>
+            Volver al inicio
+          </a>
+        </Link>
+      </main>
     </div>
-    );
+  );
+
 }

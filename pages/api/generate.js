@@ -1,28 +1,57 @@
-import { Configuration, OpenAIApi } from "openai";
+import Head from "next/head";
+import { useState } from "react";
+import styles from "./index.module.css";
+import Link from 'next/link'
 
-const configuration = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
-});
-const openai = new OpenAIApi(configuration);
+export default function Home() {
+  const [promptInput, setPrompt] = useState("");
+  const [result, setResult] = useState("");
 
-export default async function (req, res) {
-  const completion = await openai.createCompletion({
-    model: "text-davinci-002",
-    prompt: generatePrompt(req.body.animal),
-    temperature: 0.6,
-  });
-  res.status(200).json({ result: completion.data.choices[0].text });
-}
 
-function generatePrompt(animal) {
-  const capitalizedAnimal =
-    animal[0].toUpperCase() + animal.slice(1).toLowerCase();
-  return `Suggest three names for an animal that is a superhero.
+  async function onSubmit(event) {
+    event.preventDefault();
+    const response = await fetch("/api/imageGen", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ prompt: promptInput }),
+    });
+    const data = await response.json();
+    setResult(data.result);
+    setPrompt("");
+  };
 
-Animal: Cat
-Names: Captain Sharpclaw, Agent Fluffball, The Incredible Feline
-Animal: Dog
-Names: Ruff the Protector, Wonder Canine, Sir Barks-a-Lot
-Animal: ${capitalizedAnimal}
-Names:`;
+  return (
+    <div>
+      <Head>
+        <title>Photo generator</title>
+        <link rel="icon" href="/camera" />
+      </Head>
+
+      <main className={styles.main}>
+        <img src="/photo_icon.jpg" className={styles.icon} />
+        <h3>Photo generator</h3>
+        <form onSubmit={onSubmit}>
+          <input
+            type="text"
+            name="animal"
+            placeholder="Ej. Green horse with purple eyes"
+            value={promptInput}
+            onChange={(e) => setPrompt(e.target.value)}
+          />
+          <input type="submit" value="Generate image" />
+        </form>
+        <br></br>
+        <img className="result-image" src={result} />
+        <br></br>
+        <Link href="/">
+          <a>
+            Volver al inicio
+          </a>
+        </Link>
+      </main>
+    </div>
+  );
+
 }

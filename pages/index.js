@@ -7,11 +7,11 @@ function Home() {
     <div>
       <Head>
         <title>Inicio</title>
-        <link rel="icon" href="/photo_icon.jpg" />
+        <link rel="icon" href="/cam-icon.png" />
       </Head>
 
       <main className={styles.main}>
-        <img src="/photo_icon.jpg" className={styles.icon} />
+        <img src="/cam-icon.png" className={styles.icon} />
         <h2>Inicio</h2>
         <h3>Eliga un enlace</h3>
         <Link href="/generate">Generador de nombres para la mascota</Link>
