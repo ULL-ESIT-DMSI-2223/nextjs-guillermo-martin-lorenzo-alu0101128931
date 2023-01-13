@@ -14,7 +14,7 @@ function Home() {
         <img src="/cam-icon.png" className={styles.icon} />
         <h2>Inicio</h2>
         <h3>Eliga un enlace</h3>
-        <Link href="/generate">Generador de nombres para la mascota</Link>
+        <Link href="/pet">Generador de nombres para la mascota</Link>
         <br></br>
         <Link href="/image">Generador de imágenes</Link>
         <br></br>
