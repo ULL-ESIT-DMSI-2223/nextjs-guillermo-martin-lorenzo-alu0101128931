@@ -21,37 +21,28 @@ export default function Home() {
       setImageResult(imageData.imageResult);
       setTextInput("");
   };
-    
-  return (
+
+return (
     <div>
-      <Head>
-        <title>Photo generator</title>
-        <link rel="icon" href="/cam-icon.png" />
-      </Head>
-
-      <main className={styles.main}>
-        <img src="/cam-icon.png" className={styles.icon} />
-        <h3>Photo generator</h3>
-        <form onSubmit={onSubmit}>
-          <input
-            type="text"
-            name="animal"
-            placeholder="Ej. Green horse with purple eyes"
-            value={promptInput}
-            onChange={(e) => setPrompt(e.target.value)}
-          />
-          <input type="submit" value="Generate image" />
-        </form>
-        <br></br>
-        <img className="result-image" src={result} />
-        <br></br>
-        <Link href="/">
-          <a>
-            Volver al inicio
-          </a>
-        </Link>
-      </main>
+        <Head>
+            <title>OpenAI Quickstart</title>
+            <link rel="icon" href="/dog.png" />
+        </Head>
+        <main className={styles.main}>
+            <img src="/image.png" className={styles.icon} />
+                <h3>Genera una imagen a partir de texto</h3>
+                <form onSubmit={onTextSubmit}>
+                  <input
+                    type="text"
+                    name="image"
+                    placeholder="e.g. Green horse with green eyes"
+                    value={textInput}
+                    onChange={(i) => setTextInput(i.target.value)}
+                  />
+                  <input type="submit" value="Generar Imagen" />
+                </form>
+            <div className={styles.result}><img src={imageResult} />  </div>
+        </main>
     </div>
-  );
-
+    );
 }
