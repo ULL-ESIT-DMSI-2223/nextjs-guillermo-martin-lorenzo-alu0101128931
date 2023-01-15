@@ -26,11 +26,11 @@ export default function Home() {
     <div>
       <Head>
         <title>Photo generator</title>
-        <link rel="icon" href="/photo_icon.jpg" />
+        <link rel="icon" href="/cam-icon.jpg" />
       </Head>
 
       <main className={styles.main}>
-        <img src="/photo_icon.jpg" className={styles.icon} />
+        <img src="/cam-icon.jpg" className={styles.icon} />
         <h3>Photo generator</h3>
         <form onSubmit={onSubmit}>
           <input
