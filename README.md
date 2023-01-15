@@ -5,7 +5,7 @@
   - [3. Despliegue en Netlify](#3-despliegue-en-netlify)
   - [4. Separación código en varios ficheros](#4-separación-código-en-varios-ficheros)
   - [5. Ejercicios REST](#5-ejercicios-rest)
-  - [6. Ejercicio de Rutas Dinámicas](#6-ejercicio-de-rutas-dinámicas)
+
 
 
   ## 1. Generador de nombres
