@@ -22,9 +22,6 @@ Una vez completado el codigo para de index.js. Nos aparecera la api para generar
 Para el generador de imágenes debemos modificar el código de index.js y crear en la carpeta /pages/api/ otro fichero para acceder a la generación de imágenes. Para hacer la petición a la API de OpenAI y escribir con POST a espera de una respuesta necesitamos este código en /pages/pai/images.js:
 
 Luego para adaptar el índice a la salida esperada cambiamos el texto para solicitar qué imagen quiere el cliente y finalmente la imprimimos por pantalla.
-
-![images-code](docs/images/images-code.png)
-
 Una vez completado el codigo para de index.js. Nos aparecera la api para generar imágenes:
 
 ![photo-gen](docs/images/photo-gen.png)
