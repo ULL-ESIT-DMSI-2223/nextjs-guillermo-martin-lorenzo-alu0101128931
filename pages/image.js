@@ -1,27 +1,27 @@
 import Head from "next/head";
 import { useState } from "react";
 import styles from "./index.module.css";
-import Link from 'next/link'
 
 export default function Home() {
-  const [promptInput, setPrompt] = useState("");
-  const [result, setResult] = useState("");
 
-
-  async function onSubmit(event) {
-    event.preventDefault();
-    const response = await fetch("/api/imageGen", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ prompt: promptInput }),
-    });
-    const data = await response.json();
-    setResult(data.result);
-    setPrompt("");
+    const [textInput, setTextInput] = useState("");
+    const [imageResult, setImageResult] = useState();
+  
+    async function onTextSubmit(event) {
+      event.preventDefault();
+      const imageResponse = await fetch("/api/imageGen", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ text: textInput }),
+      });
+      
+      const imageData = await imageResponse.json();
+      setImageResult(imageData.imageResult);
+      setTextInput("");
   };
-
+    
   return (
     <div>
       <Head>
