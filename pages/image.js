@@ -38,7 +38,7 @@ export default function Home() {
             name="animal"
             placeholder="Ej. Green horse with purple eyes"
             value={promptInput}
-            onChange={(e) => setPrompt(e.target.value)}
+            onChange={(i) => setPrompt(i.target.value)}
           />
           <input type="submit" value="Generate image" />
         </form>
